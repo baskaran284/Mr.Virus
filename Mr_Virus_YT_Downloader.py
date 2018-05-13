@@ -1,17 +1,17 @@
 from __future__ import unicode_literals
-import youtube_dl,os,getpass
+import youtube_dl,os,getpass,sys
 from sys import argv
 from win10toast import ToastNotifier
 
 print('''
-                                                                        
-                                                                        ███╗   ███╗██████╗        ██╗   ██╗██╗██████╗ ██╗   ██╗███████╗
-                                                                        ████╗ ████║██╔══██╗       ██║   ██║██║██╔══██╗██║   ██║██╔════╝
-                                                                        ██╔████╔██║██████╔╝       ██║   ██║██║██████╔╝██║   ██║███████╗
-                                                                        ██║╚██╔╝██║██╔══██╗       ╚██╗ ██╔╝██║██╔══██╗██║   ██║╚════██║
-                                                                        ██║ ╚═╝ ██║██║  ██║    ██╗ ╚████╔╝ ██║██║  ██║╚██████╔╝███████║
-                                                                        ╚═╝     ╚═╝╚═╝  ╚═╝    ╚═╝  ╚═══╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
-                                                               
+                                                                            
+                                                                            ███╗   ███╗██████╗        ██╗   ██╗██╗██████╗ ██╗   ██╗███████╗
+                                                                            ████╗ ████║██╔══██╗       ██║   ██║██║██╔══██╗██║   ██║██╔════╝
+                                                                            ██╔████╔██║██████╔╝       ██║   ██║██║██████╔╝██║   ██║███████╗
+                                                                            ██║╚██╔╝██║██╔══██╗       ╚██╗ ██╔╝██║██╔══██╗██║   ██║╚════██║
+                                                                            ██║ ╚═╝ ██║██║  ██║    ██╗ ╚████╔╝ ██║██║  ██║╚██████╔╝███████║
+                                                                            ╚═╝     ╚═╝╚═╝  ╚═╝    ╚═╝  ╚═══╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+                                                                   
 ''')
 
 cformat=''
@@ -20,7 +20,7 @@ choice=''
 caformat=''
 ccaformat=''
 bitrate=''
-print("\n\nNote:\nAdd all YouTube links to Link.txt File[Accepts more than one link]!\nProgram will automatically Exit after Task completion!\nAuthor:Bhaskar\nCreated on:5/7/2018\nFeedback on:baskaran284@gmail.com\n")
+print("\n\nNote:\nAdd all YouTube links to Link.txt File[Accepts more than one link]!\nProgram will automatically Exit after Task completion!\n\n\nAuthor:Bhaskar\nCreated on:5/7/2018\nFeedback on:baskaran284@gmail.com\n")
 path = input("Enter path to Save Files [Hit Enter for Default CWD]:\n")
 if not path:
     path=os.getcwd()
@@ -42,20 +42,20 @@ if qal=='y' or qal=='Y':
     Hselect=input("Enter max Height<3840/2560/2160/1080/1024/720/480/144>:\n")
     Sselect=input("Enter the Max video size in MB<50/100/500/1000>:\n")
 else:
-    Hselect=''
-    Sselect=''
+    Hselect=8000
+    Sselect=1000000
     print("Video will be downloaded at max Resolution Available\n")
     
 class MyLogger(object):
     def debug(self, msg):
-        pass
-
+        print(msg,end='\r')
+		
     def warning(self, msg):
-        pass
-
+        print(msgend='\r')
+		
     def error(self, msg):
-        print(msg)
-
+        print(msgend='\r')
+		
 
 def my_hook(d):
    # print(d['status']) 
@@ -63,13 +63,14 @@ def my_hook(d):
        print('Done downloading, now converting ...')
 vdownload_options = {
     'format':'bestvideo[height<=?'+str(Hselect)+']+bestaudio/best[filesize<'+str(Sselect)+'M]' ,
+    #'format':'bestvideo+bestaudio/best',
     'outtmpl': '%(title)s.%(ext)s',
     'nocheckcertificate': True,
     'keepvideo':Ccoriginal,
-    'geo_bypass':True,
+    'geo_bypass':True,  
     'postprocessors': [{
         'key': 'FFmpegVideoConvertor',
-        'preferedformat':'',
+        'preferedformat':'mp4',
     }],
     #'logger': MyLogger(),
     'progress_hooks': [my_hook],
@@ -86,7 +87,7 @@ adownload_options = {
         'preferredcodec':'',
         'preferredquality': '',
     }],
-    #'logger': MyLogger(),
+    'logger': MyLogger(),
     'progress_hooks': [my_hook],
 }
 choi =True
@@ -159,60 +160,26 @@ while choi:
             for j in s:
              j['preferredcodec']= ccaformat
              j['preferredquality']= bitrate
-                  
-print("Mr Virus's Slaves are Working For You!\nSit Back and Enjoy Your Time!\nYou Will Get Notified Once Done With your Content")
 
-print('''
-
-                                                                                        
-                                                                                                    ▀▄───█───▄▀ 
-                                                                                                   ▄▄▄█▄▄█▄▄█▄▄▄ 
-                                                                                                ▄▀▀═════════════▀▀▄ 
-                                                                                               █══════════════════ ═█ 
-                                                                                              █════════════════════ ═█ 
-                                                                                             █═══▄▄▄▄▄▄▄═══ ▄▄▄▄▄▄▄═══█ 
-                                                                                            █═══█████████═█████████═══█ 
-                                                                                            █══██▀────▀█████▀────▀██══█ 
-                                                                                           ██████─█▀█───███─█▀█───██████ 
-                                                                                           ██████─▀▀▀───███─▀▀▀───██████ 
-                                                                                            █══▀█▄────▄██─██▄────▄█▀══█ 
-                                                                                            █════▀█████▀───▀█████▀════█ 
-                                                                                            █═════════════════════════█ 
-                                                                                            █═════════════════════════█ 
-                                                                                            █═══════█▀█▀█▀█▀█▀█═══════█ 
-                                                                                            █═══════▀▄───────▄▀═══════█ 
-                                                                                           ▐▓▓▌═══════▀▄█▄█▄▀═══════▐▓▓▌ 
-                                                                                           ▐▐▓▓▌▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▐▓▓▌▌ 
-                                                                                           █══▐▓▄▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▄▓▌══█ 
-                                                                                          █══▌═▐▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▌═▐══█ 
-                                                                                          █══█═▐▓▓▓▓▓▓▄▄▄▄▄▄▄▓▓▓▓▓▓▌═█══█ 
-                                                                                          █══█═▐▓▓▓▓▓▓▐██▀██▌▓▓▓▓▓▓▌═█══█ 
-                                                                                          █══█═▐▓▓▓▓▓▓▓▀▀▀▀▀▓▓▓▓▓▓▓▌═█══█ 
-                                                                                          █══█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█══█ 
-                                                                                         ▄█══█▐▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▌█══█▄ 
-                                                                                         █████▐▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▌─█████ 
-                                                                                         ██████▐▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▌─██████ 
-                                                                                          ▀█▀█──▐▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▌───█ ▄█▀ 
-                                                                                                 ▐▓▓▓▓▓▓▌▐▓▓▓▓▓▓▌ 
-                                                                                                  ▐▓▓▓▓▌──▐▓▓▓ ▓▌ 
-                                                                                                 ▄████▀────▀████▄ 
-                                                                                                 ▀▀▀▀────────▀▀ ▀▀
-''')
-print('''
-
-                                                                    +-+-+-+ +-+-+-+-+ +-+-+ +-+-+-+-+-+-+-+ +-+-+-+ +-+-+-+-+-+-+-+-+
-                                                                    |O|u|r| |C|r|e|w| |i|s| |W|o|r|k|i|n|g| |f|o|r| |M|r|.|V|i|r|u|s|
-                                                                    +-+-+-+ +-+-+-+-+ +-+-+ +-+-+-+-+-+-+-+ +-+-+-+ +-+-+-+-+-+-+-+-+
-                                                                          +-+-+-+ +-+-+-+-+ +-+-+-+ +-+-+-+-+ +-+ +-+-+-+-+-+-+
-                                                                          |S|i|t| |b|a|c|k| |a|n|d| |H|a|v|e| |a| |b|a|n|a|n|a|
-                                                                          +-+-+-+ +-+-+-+-+ +-+-+-+ +-+-+-+-+ +-+ +-+-+-+-+-+-+
-''')
-print("If u Free Solve This\n 01001001 00100000 01100001 01101101 00100000 01100001 00100000 01101100 01100001 01111010 01111001 00100000 01000110 01100101 01101100 01101100 01101111 01110111\n You will get a secret Message about me!\n")
-with youtube_dl.YoutubeDL(choice) as dl:
+with youtube_dl.YoutubeDL(vdownload_options) as dl:
     try:
         with open('links.txt','r') as f:
             for song_url in f:
+                #meta = dl.extract_info('https://www.youtube.com/watch?v=9bZkp7q19f0', download=True)
+                meta = dl.extract_info(song_url)
+                print( 'upload date : %s' %(meta['upload_date']))
+                print( 'uploader    : %s' %(meta['uploader']))
+                print( 'views       : %d' %(meta['view_count']))
+                print( 'likes       : %d' %(meta['like_count']))
+                print( 'dislikes    : %d' %(meta['dislike_count']))
+                print( 'id          : %s' %(meta['id']))
+                print( 'format      : %s' %(meta['format']))
+                print( 'duration    : %s' %(meta['duration']))
+                print( 'title       : %s' %(meta['title']))
+                print( 'description : %s' %(meta['description']))
+                #dl.download(["https://www.youtube.com/watch?v=9bZkp7q19f0"])
                 dl.download([song_url])
+                #dl.download(["https://www.youtube.com/watch?v=mN34s5E5UxU"])
     except:
         print("Please Check Your Links.txt File!!!")            
 
