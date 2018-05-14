@@ -87,7 +87,7 @@ adownload_options = {
         'preferredcodec':'',
         'preferredquality': '',
     }],
-    'logger': MyLogger(),
+    #'logger': MyLogger(),
     'progress_hooks': [my_hook],
 }
 choi =True
@@ -124,7 +124,9 @@ while choi:
             choice=adownload_options
             choi=False  
             loop2=True
-            bitrate=input("Enter the bitrate[320/196/128/96/56/24]")
+            while not input("Enter the bitrate[320/196/128/96/56/24]"):
+                 bitrate='320'
+                 break
       
             while loop2:
                 
@@ -162,10 +164,10 @@ while choi:
              j['preferredquality']= bitrate
 
 with youtube_dl.YoutubeDL(choice) as dl:
-    try:
-        with open('links.txt','r') as f:
-            for song_url in f:
-                #meta = dl.extract_info('https://www.youtube.com/watch?v=9bZkp7q19f0', download=True)
+    with open('links.txt','r') as f:
+        for song_url in f:
+            dl.download([song_url])
+            if song_url:
                 meta = dl.extract_info(song_url)
                 print( 'upload date : %s' %(meta['upload_date']))
                 print( 'uploader    : %s' %(meta['uploader']))
@@ -177,11 +179,7 @@ with youtube_dl.YoutubeDL(choice) as dl:
                 print( 'duration    : %s' %(meta['duration']))
                 print( 'title       : %s' %(meta['title']))
                 print( 'description : %s' %(meta['description']))
-                #dl.download(["https://www.youtube.com/watch?v=9bZkp7q19f0"])
-                dl.download([song_url])
-                #dl.download(["https://www.youtube.com/watch?v=mN34s5E5UxU"])
-    except:
-        print("Please Check Your Links.txt File!!!")            
+          
 
 toaster = ToastNotifier()
 toaster.show_toast('Mr.Virus YT downloader',"Hey "+getpass.getuser()+" \nYour Files Are ready !!!",icon_path="logo.ico",threaded=True) 		
