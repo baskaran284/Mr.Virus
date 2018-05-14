@@ -70,7 +70,7 @@ vdownload_options = {
     'geo_bypass':True,  
     'postprocessors': [{
         'key': 'FFmpegVideoConvertor',
-        'preferedformat':'mp4',
+        'preferedformat':'',
     }],
     #'logger': MyLogger(),
     'progress_hooks': [my_hook],
@@ -161,7 +161,7 @@ while choi:
              j['preferredcodec']= ccaformat
              j['preferredquality']= bitrate
 
-with youtube_dl.YoutubeDL(vdownload_options) as dl:
+with youtube_dl.YoutubeDL(choice) as dl:
     try:
         with open('links.txt','r') as f:
             for song_url in f:
