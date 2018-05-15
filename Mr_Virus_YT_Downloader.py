@@ -124,7 +124,8 @@ while choi:
             choice=adownload_options
             choi=False  
             loop2=True
-            while not input("Enter the bitrate[320/196/128/96/56/24]"):
+            bitrate = input("Enter the bitrate[320/196/128/96/56/24]")
+            while not bitrate :
                  bitrate='320'
                  break
       
